@@ -91,6 +91,8 @@
     </Compile>
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IPersonRepository.cs" />
+    <Compile Include="Repository\PersonRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
