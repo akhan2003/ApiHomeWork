@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPR.HomeWork.Api", "SPR.HomeWork.Api\SPR.HomeWork.Api.csproj", "{7D186786-0779-4F4E-8D69-43222EACE21D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPR.HomeWork.Api.Tests", "SPR.HomeWork.Api.Tests\SPR.HomeWork.Api.Tests.csproj", "{250577DB-D46B-4419-B831-ADF64B7C58D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D186786-0779-4F4E-8D69-43222EACE21D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D186786-0779-4F4E-8D69-43222EACE21D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D186786-0779-4F4E-8D69-43222EACE21D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D186786-0779-4F4E-8D69-43222EACE21D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{250577DB-D46B-4419-B831-ADF64B7C58D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{250577DB-D46B-4419-B831-ADF64B7C58D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{250577DB-D46B-4419-B831-ADF64B7C58D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{250577DB-D46B-4419-B831-ADF64B7C58D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F47AFCE-9145-4960-ACA0-4C612048FFC2}
+	EndGlobalSection
+EndGlobal
