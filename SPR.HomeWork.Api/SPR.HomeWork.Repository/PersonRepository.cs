@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using SPR.HomeWork.Api.Models;
+using SPR.HomeWork.Models;
 
-namespace SPR.HomeWork.Api.Repository
+namespace SPR.HomeWork.Repository
 {
     public class PersonRepository: IPersonRepository
     {
@@ -22,6 +22,12 @@ namespace SPR.HomeWork.Api.Repository
         {
             return persons;
         }
+
+        public Person Get(int id)
+        {
+            return persons.Find(p => p.Id == id);
+        }
+
 
         public Person Add(Person person)
         {

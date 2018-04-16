@@ -79,6 +79,14 @@
       <Project>{7D186786-0779-4F4E-8D69-43222EACE21D}</Project>
       <Name>SPR.HomeWork.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SPR.HomeWork.Models\SPR.HomeWork.Models.csproj">
+      <Project>{d886705d-0cdf-4faa-97b0-41713fcad158}</Project>
+      <Name>SPR.HomeWork.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPR.HomeWork.Repository\SPR.HomeWork.Repository.csproj">
+      <Project>{8dd96ca5-67c7-42cd-a590-e09a51c84a9b}</Project>
+      <Name>SPR.HomeWork.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

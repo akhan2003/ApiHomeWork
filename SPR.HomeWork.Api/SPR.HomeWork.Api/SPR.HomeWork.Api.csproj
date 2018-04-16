@@ -91,10 +91,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IPersonRepository.cs" />
-    <Compile Include="Repository\PersonRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -107,6 +104,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SPR.HomeWork.Models\SPR.HomeWork.Models.csproj">
+      <Project>{d886705d-0cdf-4faa-97b0-41713fcad158}</Project>
+      <Name>SPR.HomeWork.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPR.HomeWork.Repository\SPR.HomeWork.Repository.csproj">
+      <Project>{8dd96ca5-67c7-42cd-a590-e09a51c84a9b}</Project>
+      <Name>SPR.HomeWork.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

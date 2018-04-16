@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using SPR.HomeWork.Api.Models;
-using SPR.HomeWork.Api.Repository;
+using SPR.HomeWork.Models;
+using SPR.HomeWork.Repository;
 using SPR.HomeWork.Api.Constants;
 
 namespace SPR.HomeWork.Api.Controllers
@@ -20,6 +20,16 @@ namespace SPR.HomeWork.Api.Controllers
             var persons = repository.GetAll();
 
             return persons;
+        }
+
+        public Person GetPerson(int id)
+        {
+            Person item = repository.Get(id);
+            if (item == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return item;
         }
 
         public IEnumerable<Person> GetAllPersonsSorted(string SortCriteria)

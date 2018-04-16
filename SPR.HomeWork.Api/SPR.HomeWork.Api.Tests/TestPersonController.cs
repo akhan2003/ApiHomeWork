@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SPR.HomeWork.Api.Controllers;
-using SPR.HomeWork.Api.Models;
-using SPR.HomeWork.Api.Repository;
+using SPR.HomeWork.Models;
+using SPR.HomeWork.Repository;
 using SPR.HomeWork.Api.Constants;
 
 namespace SPR.HomeWork.Api.Tests
