@@ -14,12 +14,12 @@ namespace SPR.HomeWork.Api.Tests
     public class TestPersonController
     {
         [TestMethod]
-        public void GetAllPersons()
+        public void TestGet()
         {            
             var controller = new PersonController();
 
             var testPersons = GetTestPersons();
-            var result = controller.GetAllPersons() as List<Person>;
+            var result = controller.Get() as List<Person>;
             Assert.AreEqual(testPersons.Count, result.Count);
         }
 

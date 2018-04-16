@@ -7,6 +7,7 @@ using System.Web.Http;
 using SPR.HomeWork.Models;
 using SPR.HomeWork.Repository;
 using SPR.HomeWork.Api.Constants;
+using System.Web.Http.Description;
 
 namespace SPR.HomeWork.Api.Controllers
 {
@@ -22,20 +23,17 @@ namespace SPR.HomeWork.Api.Controllers
 
         [Route("persons")]
         [Route("persons/{sortcriteria?}")]
-        public IHttpActionResult Get(string sortcriteria = null)
+        //public IHttpActionResult Get(string sortcriteria = null)
+        public IEnumerable<Person> Get(string sortcriteria = null)
         {
             try
             {
                 var persons = repository.GetAll();
                 List<Person> sortedPersons = new List<Person>();
 
-                if (persons == null)
-                {
-                    return NotFound();
-                }
-
+               
                 if (sortcriteria == null)
-                    return Ok(persons);
+                    return persons;
                 else
                 {                    
 
@@ -53,13 +51,13 @@ namespace SPR.HomeWork.Api.Controllers
                         sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
 
 
-                    return Ok(sortedPersons);
+                    return sortedPersons;
                 }
             }
             catch (Exception)
             {
-                return InternalServerError();
-                
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
             }
                         
         }
