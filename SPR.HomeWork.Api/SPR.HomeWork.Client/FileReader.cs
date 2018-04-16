@@ -40,12 +40,14 @@ namespace SPR.HomeWork.Client
             ShowPersons(sortedPersons);
 
             // Keep the console window open in debug mode.
-            Console.WriteLine("Press any key to exit.");
-            System.Console.ReadKey();
+            //Console.WriteLine("Press any key to exit.");
+            //System.Console.ReadKey();
 
             //Here is a complete example of how to call the HomeWork Api.
-            //CallRestService();
-
+            System.Console.WriteLine("Calling Rest Service....");
+            CallRestService();
+            Console.WriteLine("Press any key to exit.");
+            System.Console.ReadKey();
 
         }
 
@@ -114,9 +116,9 @@ namespace SPR.HomeWork.Client
             return words;
         }
      
-        private static void CallRestService()
+        public static void CallRestService()
         {
-            string baseAddress = ConfigurationManager.AppSettings.Get("base-adddress");
+            string baseAddress = ConfigurationManager.AppSettings.Get("base-address");
 
             HttpClient conn = new HttpClient();
             //Provide the base address of tha API.  Move to config file
@@ -131,24 +133,25 @@ namespace SPR.HomeWork.Client
         }
 
 
-        static async Task GetPersonAsync(HttpClient conn)
-        {
-            using (conn)
-            {
-                HttpResponseMessage response = await conn.GetAsync("api/Person/2");
-                response.EnsureSuccessStatusCode();
+        //static async Task GetPersonAsync(HttpClient conn)
+        //{
+        //    using (conn)
+        //    {
+        //        HttpResponseMessage response = await conn.GetAsync("api/Person/2");
+        //        response.EnsureSuccessStatusCode();
 
-                if (response.IsSuccessStatusCode)
-                {
-                    Person person = await response.Content.ReadAsAsync<Person>();
-                    ShowPerson(person);
-                    Console.ReadLine();
-                }
-            }
-        }
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            Person person = await response.Content.ReadAsAsync<Person>();
+        //            ShowPerson(person);
+        //            Console.ReadLine();
+        //        }
+        //    }
+        //}
              
-        static async Task GetPersonsAsync(HttpClient conn)
+        public static async Task GetPersonsAsync(HttpClient conn)
         {
+            List<Person> persons = new List<Person>();
             using (conn)
             {
                 HttpResponseMessage response = await conn.GetAsync("api/Person");
@@ -161,29 +164,33 @@ namespace SPR.HomeWork.Client
                     var objData = JsonConvert.DeserializeObject<List<Person>>(jsonString);
 
                     foreach (Person person in objData)
-                        ShowPerson(person);
-                    Console.ReadLine();
+                        persons.Add(person);
+
+                    ShowPersons(persons);
+                    
                 }
             }
         }
 
-        static void ShowPerson(Person person)
+        public static void ShowPerson(Person person)
         {
-            Console.WriteLine($"FirstName: {person.FirstName}\tLastName: " +
+            Console.Write($"FirstName: {person.FirstName}\tLastName: " +
                 $"{person.LastName}\tGender: {person.Gender}\tFavoriteColor: " +
-                $"{person.FavoriteColor}\tDateOfBirth: {person.DateOfBirth.ToShortDateString()}");
+                $"{person.FavoriteColor}\tDateOfBirth: {person.DateOfBirth.ToShortDateString()}" + "\n");
         }
 
-        static void ShowPersons(List<Person> persons)
+        public static void ShowPersons(List<Person> persons)
         {
             foreach (Person person in persons)
             {
-                Console.WriteLine($"FirstName: {person.FirstName}\tLastName: " +
+                Console.Write($"FirstName: {person.FirstName}\tLastName: " +
                     $"{person.LastName}\tGender: {person.Gender}\tFavoriteColor: " +
                     $"{person.FavoriteColor}\tDateOfBirth: {person.DateOfBirth.ToShortDateString()}" + "\n");
+                
             }
         }
 
+       
     }
 
 
