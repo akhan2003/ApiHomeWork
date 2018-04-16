@@ -9,6 +9,7 @@ using SPR.HomeWork.Models;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Globalization;
 
 namespace SPR.HomeWork.Client
 {
@@ -40,7 +41,7 @@ namespace SPR.HomeWork.Client
             System.Console.ReadKey();
 
             //Here is a complete example of how to call the HomeWork Api.
-            CallRestService();
+            //CallRestService();
 
 
         }
@@ -63,20 +64,21 @@ namespace SPR.HomeWork.Client
             System.Console.WriteLine("Contents of file: " + filePath);
 
             var persons = new List<Person>();
-
+            Person person;
             foreach (string line in lines)
             {
                 string[] splittedLines = ParseLine(line);
+                string format = "M/d/yyyy";
+                CultureInfo provider = CultureInfo.InvariantCulture;
 
-                persons.Add(new Person
-                {
-                    FirstName = splittedLines[0],
-                    LastName = splittedLines.Length > 1 ? splittedLines[1] : null,
-                    Gender = splittedLines.Length > 2 ? splittedLines[2] : null,
-                    FavoriteColor = splittedLines.Length > 3 ? splittedLines[3] : null,
-                    DateOfBirth = Convert.ToDateTime(splittedLines[4])
-
-                });              
+                person = new Person();
+                person.FirstName = splittedLines[0];
+                person.LastName = splittedLines.Length > 1 ? splittedLines[1] : null;
+                person.Gender = splittedLines.Length > 2 ? splittedLines[2] : null;
+                person.FavoriteColor = splittedLines.Length > 3 ? splittedLines[3] : null;
+                person.DateOfBirth = DateTime.ParseExact(splittedLines[4], format, new CultureInfo("en-US"));
+                             
+                persons.Add(person);                       
 
             }
 
@@ -167,7 +169,7 @@ namespace SPR.HomeWork.Client
         {
             Console.WriteLine($"FirstName: {person.FirstName}\tLastName: " +
                 $"{person.LastName}\tGender: {person.Gender}\tFavoriteColor: " +
-                $"{person.FavoriteColor}\tDateOfBirth: {person.DateOfBirth}");
+                $"{person.FavoriteColor}\tDateOfBirth: {person.DateOfBirth.ToShortDateString()}");
         }
 
         static void ShowPersons(List<Person> persons)
@@ -176,7 +178,7 @@ namespace SPR.HomeWork.Client
             {
                 Console.WriteLine($"FirstName: {person.FirstName}\tLastName: " +
                     $"{person.LastName}\tGender: {person.Gender}\tFavoriteColor: " +
-                    $"{person.FavoriteColor}\tDateOfBirth: {person.DateOfBirth}" + "\n");
+                    $"{person.FavoriteColor}\tDateOfBirth: {person.DateOfBirth.ToShortDateString()}" + "\n");
             }
         }
 
