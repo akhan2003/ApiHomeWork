@@ -10,19 +10,63 @@ using SPR.HomeWork.Api.Constants;
 
 namespace SPR.HomeWork.Api.Controllers
 {
+    [RoutePrefix("api")]
     public class PersonController : ApiController
     {
+        //TO DO: Implement Dependency injection to simplify unit testing
+        //TO DO: consider making async tasks
+
         List<Person> persons = new List<Person>();
         PersonRepository repository = new PersonRepository();
 
-        public IEnumerable<Person> GetAllPersons()
-        {
-            var persons = repository.GetAll();
 
-            return persons;
+        [Route("persons")]
+        [Route("persons/{sortcriteria?}")]
+        public IHttpActionResult Get(string sortcriteria = null)
+        {
+            try
+            {
+                var persons = repository.GetAll();
+                List<Person> sortedPersons = new List<Person>();
+
+                if (persons == null)
+                {
+                    return NotFound();
+                }
+
+                if (sortcriteria == null)
+                    return Ok(persons);
+                else
+                {                    
+
+                    //TO DO: change to switch
+                    if (sortcriteria == PersonEnums.SortCriteria.Gender.ToString())
+                        sortedPersons = persons.OrderBy(person => person.Gender).ToList();
+
+                    else if (sortcriteria == PersonEnums.SortCriteria.Name.ToString())
+                        sortedPersons = persons.OrderBy(person => person.LastName).ToList();
+
+                    else if (sortcriteria == PersonEnums.SortCriteria.DOB.ToString())
+                        sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
+
+                    else if (sortcriteria == PersonEnums.SortCriteria.DOB.ToString())
+                        sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
+
+
+                    return Ok(sortedPersons);
+                }
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+                
+            }
+                        
         }
 
-        public Person GetPerson(int id)
+
+        [Route("persons/{id}")]
+        public Person Get(int id)
         {
             Person item = repository.Get(id);
             if (item == null)
@@ -32,30 +76,9 @@ namespace SPR.HomeWork.Api.Controllers
             return item;
         }
 
-        public IEnumerable<Person> GetAllPersonsSorted(string SortCriteria)
-        {
-            var persons = repository.GetAll();
-            List<Person> sortedPersons = new List<Person>();
+          
 
-            //TO DO: change to switch
-            if (SortCriteria == PersonEnums.SortCriteria.Gender.ToString())
-                sortedPersons = persons.OrderBy(person => person.Gender).ToList();
-
-            else if (SortCriteria == PersonEnums.SortCriteria.Name.ToString())
-                sortedPersons = persons.OrderBy(person => person.LastName).ToList();
-
-            else if (SortCriteria == PersonEnums.SortCriteria.DOB.ToString())
-                sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
-
-            else if (SortCriteria == PersonEnums.SortCriteria.DOB.ToString())
-                sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
-
-
-            return sortedPersons;
-        }
-      
-
-        public HttpResponseMessage PostProduct(Person item)
+        public HttpResponseMessage Post(Person item)
         {
             item = repository.Add(item);
             var response = Request.CreateResponse<Person>(HttpStatusCode.Created, item);
