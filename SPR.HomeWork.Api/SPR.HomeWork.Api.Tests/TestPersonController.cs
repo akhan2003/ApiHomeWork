@@ -26,9 +26,9 @@ namespace SPR.HomeWork.Api.Tests
         public List<Person> GetTestPersons()
         {
             var testPersons = new List<Person>();
-            testPersons.Add(new Person { Id = 1, FirstName = "Joe", LastName = "Schmoe", Gender = "Male", FavoriteColor = "Red", DateOfBirth = "10/1/1980" });
-            testPersons.Add(new Person { Id = 1, FirstName = "Jane", LastName = "Schmoe", Gender = "Female", FavoriteColor = "Blue", DateOfBirth = "10/1/1982" });
-            testPersons.Add(new Person { Id = 1, FirstName = "Steve", LastName = "Jobs", Gender = "Male", FavoriteColor = "Blue", DateOfBirth = "10/1/1960" });
+            testPersons.Add(new Person { Id = 1, FirstName = "Joe", LastName = "Schmoe", Gender = "Male", FavoriteColor = "Red", DateOfBirth = new DateTime(1983, 1, 18) });
+            testPersons.Add(new Person { Id = 1, FirstName = "Jane", LastName = "Schmoe", Gender = "Female", FavoriteColor = "Blue", DateOfBirth = new DateTime(1982, 1, 18) });
+            testPersons.Add(new Person { Id = 1, FirstName = "Steve", LastName = "Jobs", Gender = "Male", FavoriteColor = "Blue", DateOfBirth = new DateTime(1980, 1, 18)});
 
             return testPersons;
         }

@@ -47,6 +47,9 @@ namespace SPR.HomeWork.Api.Controllers
             else if (SortCriteria == PersonEnums.SortCriteria.DOB.ToString())
                 sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
 
+            else if (SortCriteria == PersonEnums.SortCriteria.DOB.ToString())
+                sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
+
 
             return sortedPersons;
         }

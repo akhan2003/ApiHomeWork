@@ -13,9 +13,9 @@ namespace SPR.HomeWork.Repository
 
         public PersonRepository()
         {
-            Add(new Person { FirstName = "Joe", LastName = "Schmoe", Gender = "Male", FavoriteColor = "Red", DateOfBirth = "10/1/1980" });
-            Add(new Person { FirstName = "Jane", LastName = "Schmoe", Gender = "Female", FavoriteColor = "Blue", DateOfBirth = "10/1/1982" });
-            Add(new Person { FirstName = "Steve", LastName = "Jobs", Gender = "Male", FavoriteColor = "Blue", DateOfBirth = "10/1/1960" });
+            Add(new Person { FirstName = "Joe", LastName = "Schmoe", Gender = "Male", FavoriteColor = "Red", DateOfBirth = new DateTime(1980, 1, 18)});
+            Add(new Person { FirstName = "Jane", LastName = "Schmoe", Gender = "Female", FavoriteColor = "Blue", DateOfBirth = new DateTime(1982, 1, 18)});
+            Add(new Person { FirstName = "Steve", LastName = "Jobs", Gender = "Male", FavoriteColor = "Blue", DateOfBirth = new DateTime(1983, 1, 18) });
         }
 
         public IEnumerable<Person> GetAll()

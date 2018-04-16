@@ -40,7 +40,7 @@ namespace SPR.HomeWork.Client
             System.Console.ReadKey();
 
             //Here is a complete example of how to call the HomeWork Api.
-            //CallRestService();
+            CallRestService();
 
 
         }
@@ -74,7 +74,7 @@ namespace SPR.HomeWork.Client
                     LastName = splittedLines.Length > 1 ? splittedLines[1] : null,
                     Gender = splittedLines.Length > 2 ? splittedLines[2] : null,
                     FavoriteColor = splittedLines.Length > 3 ? splittedLines[3] : null,
-                    DateOfBirth = splittedLines.Length > 4 ? splittedLines[4] : null
+                    DateOfBirth = Convert.ToDateTime(splittedLines[4])
 
                 });              
 
