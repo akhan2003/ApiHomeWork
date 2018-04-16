@@ -60,6 +60,10 @@
       <Project>{bd1b847b-a6ca-4d73-9e45-d500ec1db4bf}</Project>
       <Name>SPR.HomeWork.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SPR.HomeWork.Models\SPR.HomeWork.Models.csproj">
+      <Project>{D886705D-0CDF-4FAA-97B0-41713FCAD158}</Project>
+      <Name>SPR.HomeWork.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

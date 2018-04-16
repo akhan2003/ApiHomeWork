@@ -22,19 +22,22 @@ namespace SPR.HomeWork.Client
         {
 
             List<Person> persons;
+            List<Person> sortedPersons;
             string filePath1 = ConfigurationManager.AppSettings.Get("filePath-pipe");
 
             persons = ReadFile(filePath1);
 
             System.Console.WriteLine("Sorted by Gender....");
-            DisplayPersonSorted(persons, "Gender");
+            sortedPersons = SortList(persons, "Gender");
+            ShowPersons(sortedPersons);
 
             System.Console.WriteLine("Sorted by Name....");
-            DisplayPersonSorted(persons, "Name");
+            sortedPersons = SortList(persons, "Name");
+            ShowPersons(sortedPersons);
 
             System.Console.WriteLine("Sorted by DOB....");
-            DisplayPersonSorted(persons, "DOB");
-
+            sortedPersons = SortList(persons, "DOB");
+            ShowPersons(sortedPersons);
 
             // Keep the console window open in debug mode.
             Console.WriteLine("Press any key to exit.");
@@ -86,21 +89,20 @@ namespace SPR.HomeWork.Client
 
         }
 
-        public static void DisplayPersonSorted(List<Person> persons, string SortCriteria)
+        public static List<Person> SortList(List<Person> persons, string SortCriteria)
         {
             List<Person> sortedPersons = new List<Person>();
 
             if (SortCriteria == "Gender")
-                sortedPersons = persons.OrderBy(person => person.Gender).ToList();
+                sortedPersons = persons.OrderBy(person => person.Gender).ThenBy(person => person.LastName).ToList();
 
             else if (SortCriteria == "Name")
-                sortedPersons = persons.OrderBy(person => person.LastName).ToList();
+                sortedPersons = persons.OrderByDescending(person => person.LastName).ToList();
 
             else if (SortCriteria == "DOB")
                 sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
 
-          
-            ShowPersons(sortedPersons);
+            return sortedPersons;            
             
         }
 
