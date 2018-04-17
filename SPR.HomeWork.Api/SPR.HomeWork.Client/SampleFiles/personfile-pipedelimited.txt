@@ -1,0 +1,3 @@
+Tom | Charles | Male | Black | 01/01/1980
+John | Adams | Male | Red | 05/01/1983
+Jane | Blake | Female | Blue | 01/01/1989

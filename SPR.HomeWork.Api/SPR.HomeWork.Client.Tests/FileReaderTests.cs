@@ -134,7 +134,7 @@ namespace SPR.HomeWork.Client.Tests
         {
             var testPersons = new List<Person>();
 
-            testPersons = FileReader.ReadFile("D:\\HomeWork\\personfile-pipedelimited.txt");
+            testPersons = FileReader.ReadFile("D:\\HomeWork\\ApiHomeWork\\SPR.HomeWork.Api\\SPR.HomeWork.Client\\SampleFiles\\personfile-pipedelimited.txt");
 
             Assert.AreEqual(testPersons.Count, 3);
         }

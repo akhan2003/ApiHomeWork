@@ -25,6 +25,11 @@ namespace SPR.HomeWork.Client
             List<Person> sortedPersons;
             string filePath1 = ConfigurationManager.AppSettings.Get("filePath-pipe");
 
+            string currentDirectory = Directory.GetCurrentDirectory();            
+            string currentDirectory2 = Directory.GetParent(Directory.GetParent(currentDirectory).ToString()).ToString();
+
+            filePath1 = System.IO.Path.Combine(currentDirectory2, "SampleFiles", filePath1);
+
             persons = ReadFile(filePath1);
 
             System.Console.WriteLine("Sorted by Gender....");
@@ -38,14 +43,11 @@ namespace SPR.HomeWork.Client
             System.Console.WriteLine("Sorted by DOB....");
             sortedPersons = SortList(persons, "DOB");
             ShowPersons(sortedPersons);
-
-            // Keep the console window open in debug mode.
-            //Console.WriteLine("Press any key to exit.");
-            //System.Console.ReadKey();
-
+                       
             //Here is a complete example of how to call the HomeWork Api.
             System.Console.WriteLine("Calling Rest Service....");
             CallRestService();
+            // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
             System.Console.ReadKey();
 
@@ -126,10 +128,10 @@ namespace SPR.HomeWork.Client
             conn.DefaultRequestHeaders.Accept.Clear();
             //set Accept Header to send the data in JSON format
             conn.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            //GetPersonAsync(conn).Wait();
-
+                       
             GetPersonsAsync(conn).Wait();
+
+            //GetPersonsAsync(conn).GetAwaiter().GetResult();
         }
 
 
@@ -154,7 +156,7 @@ namespace SPR.HomeWork.Client
             List<Person> persons = new List<Person>();
             using (conn)
             {
-                HttpResponseMessage response = await conn.GetAsync("api/Person");
+                HttpResponseMessage response = await conn.GetAsync("api/Persons");
                 response.EnsureSuccessStatusCode();
 
                 if (response.IsSuccessStatusCode)
