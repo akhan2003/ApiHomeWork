@@ -39,16 +39,14 @@ namespace SPR.HomeWork.Api.Controllers
 
                     //TO DO: change to switch
                     if (sortcriteria == PersonEnums.SortCriteria.Gender.ToString())
-                        sortedPersons = persons.OrderBy(person => person.Gender).ToList();
+                        sortedPersons = persons.OrderBy(person => person.Gender).ThenBy(person => person.LastName).ToList();
 
                     else if (sortcriteria == PersonEnums.SortCriteria.Name.ToString())
-                        sortedPersons = persons.OrderBy(person => person.LastName).ToList();
+                        sortedPersons = persons.OrderByDescending(person => person.LastName).ToList();
 
                     else if (sortcriteria == PersonEnums.SortCriteria.DOB.ToString())
                         sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
 
-                    else if (sortcriteria == PersonEnums.SortCriteria.DOB.ToString())
-                        sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
 
 
                     return sortedPersons;
