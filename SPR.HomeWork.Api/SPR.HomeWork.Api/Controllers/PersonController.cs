@@ -55,7 +55,7 @@ namespace SPR.HomeWork.Api.Controllers
             catch (Exception)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
-
+                
             }
                         
         }
