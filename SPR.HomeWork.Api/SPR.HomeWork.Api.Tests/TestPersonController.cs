@@ -18,9 +18,14 @@ namespace SPR.HomeWork.Api.Tests
         {            
             var controller = new PersonController();
 
-            var testPersons = GetTestPersons();
-            var result = controller.Get() as List<Person>;
-            Assert.AreEqual(testPersons.Count, result.Count);
+            //var testPersons = GetTestPersons();
+
+            var result = controller.Get();
+                       
+            var contentResult = result as OkNegotiatedContentResult<IEnumerable<Person>>;
+
+            Assert.IsNotNull(contentResult);          
+           
         }
 
         public List<Person> GetTestPersons()

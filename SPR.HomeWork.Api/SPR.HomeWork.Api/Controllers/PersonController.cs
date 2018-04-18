@@ -8,6 +8,7 @@ using SPR.HomeWork.Models;
 using SPR.HomeWork.Repository;
 using SPR.HomeWork.Api.Constants;
 using System.Web.Http.Description;
+using SPR.HomeWork.Api.Helper;
 
 namespace SPR.HomeWork.Api.Controllers
 {
@@ -20,44 +21,26 @@ namespace SPR.HomeWork.Api.Controllers
         List<Person> persons = new List<Person>();
         PersonRepository repository = new PersonRepository();
 
-
         [Route("persons")]
         [Route("persons/{sortcriteria?}")]
-        //public IHttpActionResult Get(string sortcriteria = null)
-        public IEnumerable<Person> Get(string sortcriteria = null)
+        public IHttpActionResult Get(string sort = null)
         {
             try
             {
-                var persons = repository.GetAll();
-                List<Person> sortedPersons = new List<Person>();
-
+                var returnValue = repository.GetAll();
                
-                if (sortcriteria == null)
-                    return persons;
+                if (sort == null)                    
+                    return Ok(returnValue);
                 else
-                {                    
-
-                    //TO DO: change to switch
-                    if (sortcriteria == PersonEnums.SortCriteria.Gender.ToString())
-                        sortedPersons = persons.OrderBy(person => person.Gender).ThenBy(person => person.LastName).ToList();
-
-                    else if (sortcriteria == PersonEnums.SortCriteria.Name.ToString())
-                        sortedPersons = persons.OrderByDescending(person => person.LastName).ToList();
-
-                    else if (sortcriteria == PersonEnums.SortCriteria.DOB.ToString())
-                        sortedPersons = persons.OrderBy(person => person.DateOfBirth).ToList();
-
-
-
-                    return sortedPersons;
+                {
+                    return Ok(returnValue.AsQueryable().ApplySort(sort));             
                 }
             }
             catch (Exception)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-                
+                return InternalServerError();
             }
-                        
+
         }
 
 
@@ -72,17 +55,6 @@ namespace SPR.HomeWork.Api.Controllers
             return item;
         }
 
-
-        //[HttpPost]
-        // public HttpResponseMessage Post(Person item)
-        // {
-        //     item = repository.Add(item);
-        //     var response = Request.CreateResponse<Person>(HttpStatusCode.Created, item);
-
-        //     string uri = Url.Link("DefaultApi", new { id = item.Id });
-        //     response.Headers.Location = new Uri(uri);
-        //     return response;
-        // }
 
         [HttpPost]
         public IHttpActionResult Post(Person item)
