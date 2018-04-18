@@ -15,7 +15,7 @@ namespace SPR.HomeWork.Api.Controllers
     public class PersonController : ApiController
     {
         //TO DO: Implement Dependency injection to simplify unit testing
-        //TO DO: consider making async tasks
+        //TO DO: Implement async tasks
 
         List<Person> persons = new List<Person>();
         PersonRepository repository = new PersonRepository();
@@ -72,19 +72,42 @@ namespace SPR.HomeWork.Api.Controllers
             return item;
         }
 
-          
 
-        public HttpResponseMessage Post(Person item)
+        //[HttpPost]
+        // public HttpResponseMessage Post(Person item)
+        // {
+        //     item = repository.Add(item);
+        //     var response = Request.CreateResponse<Person>(HttpStatusCode.Created, item);
+
+        //     string uri = Url.Link("DefaultApi", new { id = item.Id });
+        //     response.Headers.Location = new Uri(uri);
+        //     return response;
+        // }
+
+        [HttpPost]
+        public IHttpActionResult Post(Person item)
         {
-            item = repository.Add(item);
-            var response = Request.CreateResponse<Person>(HttpStatusCode.Created, item);
+            try
+            {
+                if (item ==null)
+                {
+                    return BadRequest();
+                }
 
-            string uri = Url.Link("DefaultApi", new { id = item.Id });
-            response.Headers.Location = new Uri(uri);
-            return response;
+                item = repository.Add(item);
+                
+                if (item != null)
+                    return Created(Request.RequestUri + "/" + item.Id.ToString(), item);
+
+                return BadRequest();                
+
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }           
         }
 
-       
 
     }
 }
